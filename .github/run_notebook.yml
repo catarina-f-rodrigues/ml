@@ -1,0 +1,26 @@
+name: Run Jupyter Notebook
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Set your desired schedule (every day at midnight in this example)
+
+jobs:
+  run_notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt  # If you have any dependencies
+
+      - name: Run Jupyter Notebook
+        run: |
+          jupyter nbconvert --to notebook --execute your_notebook.ipynb
